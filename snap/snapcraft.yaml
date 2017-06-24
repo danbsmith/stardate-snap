@@ -1,0 +1,28 @@
+name: stardate-snap # you probably want to 'snapcraft register <name>'
+version: '0.1' # just for humans, typically '1.2+git' or '1.3.2'
+summary: Command line tool to convert conventional time to stardate time.
+description: |
+  This program can display the current time as a stardate, or convert a Unix
+  time stamp to be displayed as a stardate.  The stardate increases by
+  1000 / year, and the zero point is in the 24th century.
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+parts:
+  stardate-calculator:
+    # See 'snapcraft plugins'
+    plugin: make
+    source: ./stardate-calculator
+    make-parameters: [stardate, INSTALL=$SNAPCRAFT_PART_INSTALL]
+  stardate-wrappers:
+    plugin: dump
+    source: ./
+    install: |
+      mkdir $SNAPCRAFT_PART_INSTALL/bin
+      mv stardate-wrappers/*.sh $SNAPCRAFT_PART_INSTALL/bin
+
+apps:
+  stardate-now:
+    command: stardate-now.sh
+  stardate-unix:
+    command: stardate-unix.sh
