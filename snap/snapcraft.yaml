@@ -5,7 +5,7 @@ description: |
   This program can display the current time as a stardate, or convert a Unix
   time stamp to be displayed as a stardate.  The stardate increases by
   1000 / year, and the zero point is in the 24th century.
-grade: devel # must be 'stable' to release into candidate/stable channels
+grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
 
 parts:
